@@ -1,0 +1,134 @@
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: Bitcoin APIs for Crypto Wallet MVP
+  description: Bitcoin(Regression Test Nework) APIs
+  contact: {}
+host: 52.78.175.59:3000
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /blockchain/info:
+    get:
+      description: "Returns an object containing various state info."
+      summary: "Returns an object containing various state info."
+      operationId: getBlockchainInfo
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        200:
+          description: ""
+  /blockchain/mempool/info:
+    get:
+      description: "Returns all transaction ids in memory pool."
+      summary: "Returns all transaction ids in memory pool."
+      operationId: getMempoolInfo
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        200:
+          description: ""
+  /wallet/newadd:
+    get:
+      description: "Returns a new bitcoin address for receiving payments."
+      summary: "Returns a new bitcoin address for receiving payments."
+      operationId: getNewAddress
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        200:
+          description: ""
+  /wallet/{address}/balance/:
+    get:
+      description: "Returns the balance in the account."
+      summary: "Returns the balance in the account."
+      operationId: getBalance
+      produces:
+        - application/json
+      parameters:
+        - name: address
+          in: path
+          required: true
+          type: string
+          description: ""
+      responses:
+        200:
+          description: ""
+
+  /wallet/{address}/unspent/:
+    get:
+      description: "Returns array of unspent transaction inputs in the account."
+      summary: "Returns array of unspent transaction inputs in the account."
+      operationId: getUnspent
+      produces:
+        - application/json
+      parameters:
+        - name: address
+          in: path
+          required: true
+          type: string
+          description: ""
+      responses:
+        200:
+          description: ""
+  /rawtx/create:
+    post:
+      description: "Creates a raw transaction spending given inputs."
+      summary: "Creates a raw transaction spending given inputs."
+      operationId: createRawTrasaction
+      produces:
+        - application/json
+      parameters:
+        - name: fromAdd
+          in: formData
+          required: true
+          description: "from Address"
+          type: string
+        - name: toAdd
+          in: formData
+          required: true
+          description: "to Address"
+          type: string
+        - name: amount
+          in: formData
+          required: true
+          description: "transfer amount"
+          type: number
+        - name: fee
+          in: formData
+          required: true
+          description: "transfer fee"
+          type: number
+      responses:
+        200:
+          description: ""
+  /rawtx/sign:
+    post:
+      description: "Sign a raw transaction with given private key."
+      summary: "Sign a raw transaction with given private key."
+      operationId: signRawTransaction
+      produces:
+        - application/json
+      parameters:
+        - name: hex
+          in: formData
+          required: true
+          description: "raw transaction hex value"
+          type: string
+        - name: privkey
+          in: formData
+          required: true
+          description: "private key to sign raw transaction"
+          type: string
+      responses:
+        200:
+          description: ""
+
+tags: []
